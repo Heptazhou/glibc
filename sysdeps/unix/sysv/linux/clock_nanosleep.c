@@ -50,8 +50,7 @@ __clock_nanosleep_time64 (clockid_t clock_id, int flags,
 #else
   if (!in_time_t_range (req->tv_sec))
     {
-      r = INTERNAL_SYSCALL_CANCEL (clock_nanosleep_time64, clock_id, flags,
-				   req, rem);
+      r = -ENOSYS; // INTERNAL_SYSCALL_CANCEL (clock_nanosleep_time64, clock_id, flags, req, rem);
       if (r == -ENOSYS)
 	r = -EOVERFLOW;
     }
