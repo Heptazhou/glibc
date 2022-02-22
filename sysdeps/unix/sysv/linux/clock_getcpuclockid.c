@@ -34,7 +34,7 @@ __clock_getcpuclockid (pid_t pid, clockid_t *clock_id)
 #ifndef __NR_clock_getres_time64
 # define __NR_clock_getres_time64 __NR_clock_getres
 #endif
-  int r = INTERNAL_SYSCALL_CALL (clock_getres_time64, pidclock, NULL);
+  int r = -ENOSYS; // INTERNAL_SYSCALL_CALL (clock_getres_time64, pidclock, NULL);
 
 #ifndef __ASSUME_TIME64_SYSCALLS
   if (r != 0 && r == -ENOSYS)
