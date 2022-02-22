@@ -39,8 +39,8 @@ ___mq_timedsend_time64 (mqd_t mqdes, const char *msg_ptr, size_t msg_len,
 		     && !in_time_t_range (abs_timeout->tv_sec);
   if (need_time64)
     {
-      int r = SYSCALL_CANCEL (mq_timedsend_time64, mqdes, msg_ptr, msg_len,
-			      msg_prio, abs_timeout);
+      int r = -1; // SYSCALL_CANCEL (mq_timedsend_time64, mqdes, msg_ptr, msg_len, msg_prio, abs_timeout);
+      errno = ENOSYS;
       if (r == 0 || errno != ENOSYS)
 	return r;
       __set_errno (EOVERFLOW);
