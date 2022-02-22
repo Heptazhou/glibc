@@ -39,8 +39,7 @@ ___timer_settime64 (timer_t timerid, int flags,
                               ovalue);
 # else
 #  ifdef __NR_timer_settime64
-  int ret = INLINE_SYSCALL_CALL (timer_settime64, ktimerid, flags, value,
-                                 ovalue);
+  int ret = ENOSYS; // INLINE_SYSCALL_CALL (timer_settime64, ktimerid, flags, value, ovalue);
   if (ret == 0 || errno != ENOSYS)
     return ret;
 #  endif
