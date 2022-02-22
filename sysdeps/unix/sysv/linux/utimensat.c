@@ -46,8 +46,8 @@ __utimensat64_helper (int fd, const char *file,
 			     && !in_int32_t_range (tsp64[1].tv_sec)));
   if (need_time64)
     {
-      int r = INLINE_SYSCALL_CALL (utimensat_time64, fd, file, &tsp64[0],
-				   flags);
+      int r = -1; // INLINE_SYSCALL_CALL (utimensat_time64, fd, file, &tsp64[0], flags);
+      errno = ENOSYS;
       if (r == 0 || errno != ENOSYS)
 	return r;
       __set_errno (EOVERFLOW);
