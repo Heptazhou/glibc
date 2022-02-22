@@ -26,8 +26,8 @@ recvmmsg_syscall (int fd, struct mmsghdr *vmessages, unsigned int vlen,
 #ifndef __NR_recvmmsg_time64
 # define __NR_recvmmsg_time64 __NR_recvmmsg
 #endif
-  int r = SYSCALL_CANCEL (recvmmsg_time64, fd, vmessages, vlen, flags,
-			  timeout);
+  int r = -1; // SYSCALL_CANCEL (recvmmsg_time64, fd, vmessages, vlen, flags, timeout);
+  errno = ENOSYS;
 #ifndef __ASSUME_TIME64_SYSCALLS
   if (r >= 0 || errno != ENOSYS)
     return r;
