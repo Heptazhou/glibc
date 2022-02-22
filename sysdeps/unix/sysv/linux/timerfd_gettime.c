@@ -32,7 +32,8 @@ __timerfd_gettime64 (int fd, struct __itimerspec64 *value)
 #ifdef __ASSUME_TIME64_SYSCALLS
   return INLINE_SYSCALL_CALL (timerfd_gettime64, fd, value);
 #else
-  int ret = INLINE_SYSCALL_CALL (timerfd_gettime64, fd, value);
+  int ret = -1; // INLINE_SYSCALL_CALL (timerfd_gettime64, fd, value);
+  errno = ENOSYS;
   if (ret == 0 || errno != ENOSYS)
     return ret;
   struct itimerspec its32;
