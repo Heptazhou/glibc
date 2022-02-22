@@ -37,8 +37,8 @@ __timerfd_settime64 (int fd, int flags, const struct __itimerspec64 *value,
 		     || !in_int32_t_range (value->it_interval.tv_sec);
   if (need_time64)
     {
-      int r = INLINE_SYSCALL_CALL (timerfd_settime64, fd, flags, value,
-				   ovalue);
+      int r = -1; // INLINE_SYSCALL_CALL (timerfd_settime64, fd, flags, value, ovalue);
+      errno = ENOSYS;
       if (r == 0 || errno != ENOSYS)
 	return r;
       __set_errno (EOVERFLOW);
