@@ -54,13 +54,9 @@ __futex_abstimed_wait_common64 (unsigned int* futex_word,
                                 int private, bool cancel)
 {
   if (cancel)
-    return INTERNAL_SYSCALL_CANCEL (futex_time64, futex_word, op, expected,
-				    abstime, NULL /* Unused.  */,
-				    FUTEX_BITSET_MATCH_ANY);
+    return -ENOSYS; // INTERNAL_SYSCALL_CANCEL (futex_time64, futex_word, op, expected, abstime, NULL /* Unused.  */, FUTEX_BITSET_MATCH_ANY);
   else
-    return INTERNAL_SYSCALL_CALL (futex_time64, futex_word, op, expected,
-				  abstime, NULL /* Ununsed.  */,
-				  FUTEX_BITSET_MATCH_ANY);
+    return -ENOSYS; // INTERNAL_SYSCALL_CALL (futex_time64, futex_word, op, expected, abstime, NULL /* Ununsed.  */, FUTEX_BITSET_MATCH_ANY);
 }
 
 static int
