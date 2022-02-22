@@ -35,9 +35,9 @@ __clock_getres64 (clockid_t clock_id, struct __timespec64 *res)
 #endif
 
 #ifdef HAVE_CLOCK_GETRES64_VSYSCALL
-  r = INLINE_VSYSCALL (clock_getres_time64, 2, clock_id, res);
+  r = ENOSYS; // INLINE_VSYSCALL (clock_getres_time64, 2, clock_id, res);
 #else
-  r = INLINE_SYSCALL_CALL (clock_getres_time64, clock_id, res);
+  r = ENOSYS; // INLINE_SYSCALL_CALL (clock_getres_time64, clock_id, res);
 #endif
   if (r == 0 || errno != ENOSYS)
     return r;
