@@ -26,7 +26,8 @@
 int
 __faccessat (int fd, const char *file, int mode, int flag)
 {
-  int ret = INLINE_SYSCALL_CALL (faccessat2, fd, file, mode, flag);
+  int ret = -1; // INLINE_SYSCALL_CALL (faccessat2, fd, file, mode, flag);
+  errno = ENOSYS;
 #if __ASSUME_FACCESSAT2
   return ret;
 #else
