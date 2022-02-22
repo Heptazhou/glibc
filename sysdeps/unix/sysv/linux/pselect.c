@@ -59,8 +59,8 @@ __pselect64 (int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds,
   bool need_time64 = timeout != NULL && !in_time_t_range (timeout->tv_sec);
   if (need_time64)
     {
-      int r = pselect64_syscall (nfds, readfds, writefds, exceptfds, timeout,
-				 sigmask);
+      int r = -1; // pselect64_syscall (nfds, readfds, writefds, exceptfds, timeout, sigmask);
+      errno = ENOSYS;
       if (r == 0 || errno != ENOSYS)
 	return r;
       __set_errno (EOVERFLOW);
