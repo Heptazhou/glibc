@@ -35,7 +35,8 @@ __clock_settime64 (clockid_t clock_id, const struct __timespec64 *tp)
 #ifndef __NR_clock_settime64
 # define __NR_clock_settime64 __NR_clock_settime
 #endif
-  int ret = INLINE_SYSCALL_CALL (clock_settime64, clock_id, tp);
+  int ret = -1; // INLINE_SYSCALL_CALL (clock_settime64, clock_id, tp);
+  errno = ENOSYS;
 
 #ifndef __ASSUME_TIME64_SYSCALLS
   if (ret == 0 || errno != ENOSYS)
