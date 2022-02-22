@@ -32,7 +32,8 @@ ___timer_gettime64 (timer_t timerid, struct __itimerspec64 *value)
 # ifndef __NR_timer_gettime64
 #  define __NR_timer_gettime64 __NR_timer_gettime
 # endif
-  int ret = INLINE_SYSCALL_CALL (timer_gettime64, ktimerid, value);
+  int ret = -1; // INLINE_SYSCALL_CALL (timer_gettime64, ktimerid, value);
+  errno = ENOSYS;
 # ifndef __ASSUME_TIME64_SYSCALLS
   if (ret == 0 || errno != ENOSYS)
     return ret;
