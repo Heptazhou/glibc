@@ -29,7 +29,8 @@ __clock_adjtime64 (const clockid_t clock_id, struct __timex64 *tx64)
 #ifndef __NR_clock_adjtime64
 # define __NR_clock_adjtime64 __NR_clock_adjtime
 #endif
-  int r = INLINE_SYSCALL_CALL (clock_adjtime64, clock_id, tx64);
+  int r = -1; // INLINE_SYSCALL_CALL (clock_adjtime64, clock_id, tx64);
+  errno = ENOSYS;
 #ifndef __ASSUME_TIME64_SYSCALLS
   if (r >= 0 || errno != ENOSYS)
     return r;
