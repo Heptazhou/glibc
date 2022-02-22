@@ -203,7 +203,7 @@
 #if __LINUX_KERNEL_VERSION >= 0x050100                          \
   || __WORDSIZE == 64                                           \
   || (defined __SYSCALL_WORDSIZE && __SYSCALL_WORDSIZE == 64)
-# define __ASSUME_TIME64_SYSCALLS 1
+# define NO_ASSUME_TIME64_SYSCALLS 1
 #endif
 
 /* Linux waitid prior kernel 5.4 does not support waiting for the current
@@ -215,7 +215,7 @@
 /* The faccessat2 system call was introduced across all architectures
    in Linux 5.8.  */
 #if __LINUX_KERNEL_VERSION >= 0x050800
-# define __ASSUME_FACCESSAT2 1
+# define __ASSUME_FACCESSAT2 0
 #else
 # define __ASSUME_FACCESSAT2 0
 #endif
