@@ -45,7 +45,8 @@ __semtimedop64 (int semid, struct sembuf *sops, size_t nsops,
   bool need_time64 = timeout != NULL && !in_time_t_range (timeout->tv_sec);
   if (need_time64)
     {
-      int r = semtimedop_syscall (semid, sops, nsops, timeout);
+      int r = -1; // semtimedop_syscall (semid, sops, nsops, timeout);
+      errno = ENOSYS;
       if (r == 0 || errno != ENOSYS)
 	return r;
       __set_errno (EOVERFLOW);
